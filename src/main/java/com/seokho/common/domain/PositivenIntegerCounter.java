@@ -1,10 +1,10 @@
-package com.seokho.user.domain;
+package com.seokho.common.domain;
 
-public class UserRelationCounter {
+public class PositivenIntegerCounter {
 
     private int count;
 
-    public UserRelationCounter() {
+    public PositivenIntegerCounter() {
         this.count =0;
     }
 
@@ -16,5 +16,9 @@ public class UserRelationCounter {
             return;
         }
         this.count--;
+    }
+
+    public int getCount() {
+        return count;
     }
 }

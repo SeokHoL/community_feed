@@ -1,19 +1,25 @@
 package com.seokho.user.domain;
 
+import com.seokho.common.domain.PositivenIntegerCounter;
+
 import java.util.Objects;
 
 public class User {
 
     private final Long id;
     private final UserInfo info;
-    private final UserRelationCounter followingCount;
-    private final UserRelationCounter followorCounter;
+    private final PositivenIntegerCounter followingCount;
+    private final PositivenIntegerCounter followorCounter;
 
     public User (Long id, UserInfo userInfo) {
+        if (userInfo ==null){
+            throw new IllegalArgumentException();
+        }
+
         this.id = id;
         this.info =userInfo;
-        this.followingCount = new UserRelationCounter();
-        this.followorCounter = new UserRelationCounter();
+        this.followingCount = new PositivenIntegerCounter();
+        this.followorCounter = new PositivenIntegerCounter();
     }
     public void follow(User targetUser){
         if (targetUser.equals(this)){
@@ -55,5 +61,29 @@ public class User {
     @Override
     public int hashCode() {
         return Objects.hashCode(id);
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public int follwerCount(){
+        return followorCounter.getCount();
+    }
+
+    public int followingCount(){
+        return followingCount.getCount();
+    }
+
+    public UserInfo getInfo() {
+        return info;
+    }
+
+    public PositivenIntegerCounter getFollowingCount() {
+        return followingCount;
+    }
+
+    public PositivenIntegerCounter getFolloworCounter() {
+        return followorCounter;
     }
 }
